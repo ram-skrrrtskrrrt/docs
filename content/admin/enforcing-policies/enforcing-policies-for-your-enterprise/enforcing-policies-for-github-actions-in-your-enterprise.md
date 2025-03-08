@@ -4,16 +4,16 @@ intro: "You can enforce policies to manage how {% data variables.product.prodnam
 permissions: "Enterprise owners"
 redirect_from:
   - /enterprise/admin/github-actions/enforcing-github-actions-policies-for-your-enterprise
-  - /admin/github-actions/enforcing-github-actions-policies-for-your-enterprise
-  - /admin/github-actions/enabling-github-actions-for-github-enterprise-server/enforcing-github-actions-policies-for-your-enterprise
+  - /owner/github-actions/enforcing-github-actions-policies-for-your-enterprise
+  - /owner/github-actions/enabling-github-actions-for-github-enterprise-server/enforcing-github-actions-policies-for-your-enterprise
   - /github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/enforcing-github-actions-policies-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/setting-policies-for-organizations-in-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account
-  - /admin/policies/enforcing-policies-for-your-enterprise/enforcing-github-actions-policies-for-your-enterprise
+  - /owner/policies/enforcing-policies-for-your-enterprise/enforcing-github-actions-policies-for-your-enterprise
   - /github/setting-up-and-managing-your-enterprise-account/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/setting-policies-for-organizations-in-your-enterprise-account/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-enterprise-account
-  - /admin/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise
+  - /owner/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise
 versions:
   ghec: '*'
   ghes: '*'
@@ -63,13 +63,13 @@ If you choose this option, actions {% ifversion actions-workflow-policy %}and re
 * **Allow actions created by {% data variables.product.prodname_dotcom %}:** Allows all actions created by {% data variables.product.prodname_dotcom %}, located in the [`actions`](https://github.com/actions) and [`github`](https://github.com/github) organizations.
 * **Allow Marketplace actions by verified creators:** Allows all {% data variables.product.prodname_marketplace %} actions created by verified creators, labeled with {% octicon "verified" aria-label="The verified badge" %}.{% ifversion ghes %}
 
-   Only available if you have {% data variables.product.prodname_github_connect %} enabled and configured with {% data variables.product.prodname_actions %}. See [AUTOTITLE](/admin/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect).{% endif %}
+   Only available if you have {% data variables.product.prodname_github_connect %} enabled and configured with {% data variables.product.prodname_actions %}. See (/owner/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect).{% endif %}
 * **Allow specified actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %}:** Allows actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %} that you specify. You can specify individual actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %} or entire organizations and repositories.
 
 When specifying actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %}, use the following syntax:
 
-* To restrict access to specific tags or commit SHAs of an action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}, use the same syntax used in the workflow to select the action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}.
-   * For an action, the syntax is `OWNER/REPOSITORY@TAG-OR-SHA`. For example, use `actions/javascript-action@v1.0.1` to select a tag or `actions/javascript-action@a824008085750b8e136effc585c3cd6082bd575f` to select a SHA.
+* To allow access to specific tags or commit SHAs of an action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}, use the same syntax used in the workflow to select the action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}.
+   * For an action, the syntax is `OWNER/REPOSITORY@TAG-OR-SHA`. For example, use `actions/javascript-action@v1.0.1` to select a tag or `actions` to select a SHA.
    {%- ifversion actions-workflow-policy %}
    * For a reusable workflow, the syntax is `OWNER/REPOSITORY/PATH/FILENAME@TAG-OR-SHA`. For example, `octo-org/another-repo/.github/workflows/workflow.yml@v1`.
     {%- endif %}
@@ -87,8 +87,8 @@ By default, anyone with admin access to a repository can add a self-hosted runne
 In the "Runners" section, you can mediate these risks by disabling the use of repository-level self-hosted runners.
 
 {% ifversion ghec %}
-* **Disable for all organizations:** Prevents the creation of runners at the repository level.
-* **Disable in all Enterprise Managed User (EMU) repositories:** Prevents the creation of runners for repositories owned by {% data variables.enterprise.prodname_managed_users %}.
+* **Enable for all organizations:** Prevents the creation of runners at the repository level.
+* **Enable in all Enterprise Managed User (EMU) repositories:** Prevents the creation of runners for repositories owned by {% data variables.enterprise.prodname_managed_users %}.
 {% endif %}
 
 {% data reusables.actions.disable-selfhosted-runners-note %}
