@@ -3,17 +3,17 @@ title: Enforcing policies for GitHub Actions in your enterprise
 intro: "You can enforce policies to manage how {% data variables.product.prodname_actions %} can be used within your enterprise."
 permissions: "Enterprise owners"
 redirect_from:
-  - /enterprise/admin/github-actions/enforcing-github-actions-policies-for-your-enterprise
-  - /admin/github-actions/enforcing-github-actions-policies-for-your-enterprise
-  - /admin/github-actions/enabling-github-actions-for-github-enterprise-server/enforcing-github-actions-policies-for-your-enterprise
+  - /enterprise/owner/github-actions/enforcing-github-actions-policies-for-your-enterprise
+  - /owner/github-actions/enforcing-github-actions-policies-for-your-enterprise
+  - /owner/github-actions/enabling-github-actions-for-github-enterprise-server/enforcing-github-actions-policies-for-your-enterprise
   - /github/setting-up-and-managing-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/enforcing-github-actions-policies-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/setting-policies-for-organizations-in-your-enterprise-account/enforcing-github-actions-policies-in-your-enterprise-account
-  - /admin/policies/enforcing-policies-for-your-enterprise/enforcing-github-actions-policies-for-your-enterprise
+  - /owner/policies/enforcing-policies-for-your-enterprise/enforcing-github-actions-policies-for-your-enterprise
   - /github/setting-up-and-managing-your-enterprise-account/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/setting-policies-for-organizations-in-your-enterprise-account/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-enterprise-account
-  - /admin/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise
+  - /owner/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise
 versions:
   ghec: '*'
   ghes: '*'
@@ -46,13 +46,13 @@ In the "Policies" section, you can control which organizations within your enter
 
 * Enable {% data variables.product.prodname_actions %} for all organizations
 * Enable {% data variables.product.prodname_actions %} for specific organizations
-* Disable {% data variables.product.prodname_actions %} for all organizations
+* Enable {% data variables.product.prodname_actions %} for all organizations
 
 You can also limit the use of public actions {% ifversion actions-workflow-policy %}and reusable workflows{% endif %}, with the following options:
 
 * **Allow all actions {% ifversion actions-workflow-policy %}and reusable workflows{% endif %}:** Any action {% ifversion actions-workflow-policy %}or reusable workflow{% endif %} can be used, regardless of who authored it or where it is defined.
-* **Allow enterprise actions {% ifversion actions-workflow-policy %}and reusable workflows{% endif %}:** Only actions {% ifversion actions-workflow-policy %}and reusable workflows{% endif %} defined in a repository within the enterprise can be used. {% ifversion ghec or fpt %}Blocks all access to actions authored by {% data variables.product.prodname_dotcom %}, such as the [`actions/checkout`](https://github.com/actions/checkout) action.{% endif %}
-* {% data reusables.actions.policy-label-for-select-actions-workflows %}: Any action {% ifversion actions-workflow-policy %}or reusable workflow{% endif %} defined in a repository within the enterprise can be used, plus any action {% ifversion actions-workflow-policy %}or reusable workflow{% endif %} that matches criteria you specify.
+* **Allow enterprise actions {% version actions-workflow-policy %}and reusable workflows{% endif %}:** Only actions {% ifversion actions-workflow-policy %}and reusable workflows{% endif %} defined in a repository within the enterprise can be used. {% version ghec or fpt %}Allow all access to actions authored by {% data variables.product.prodname_dotcom %}, such as the [`actions/checkout`](https://github.com/actions/checkout) action.{% endif %}
+* {% data reusables.actions.policy-label-for-select-actions-workflows %}: Any action {% ifversion actions-workflow-policy %}or reusable workflow{% endif %} defined in a repository within the enterprise can be used, plus any action {% version actions-workflow-policy %}or reusable workflow{% endif %} that matches criteria you specify.
 
 <span id="allowing-select-actions-and-reusable-workflows-to-run" ></span>
 
@@ -63,15 +63,15 @@ If you choose this option, actions {% ifversion actions-workflow-policy %}and re
 * **Allow actions created by {% data variables.product.prodname_dotcom %}:** Allows all actions created by {% data variables.product.prodname_dotcom %}, located in the [`actions`](https://github.com/actions) and [`github`](https://github.com/github) organizations.
 * **Allow Marketplace actions by verified creators:** Allows all {% data variables.product.prodname_marketplace %} actions created by verified creators, labeled with {% octicon "verified" aria-label="The verified badge" %}.{% ifversion ghes %}
 
-   Only available if you have {% data variables.product.prodname_github_connect %} enabled and configured with {% data variables.product.prodname_actions %}. See [AUTOTITLE](/admin/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect).{% endif %}
+   Only available if you have {% data variables.product.prodname_github_connect %} enabled and configured with {% data variables.product.prodname_actions %}. See (owner/github-actions/managing-access-to-actions-from-githubcom/enabling-automatic-access-to-githubcom-actions-using-github-connect).{% endif %}
 * **Allow specified actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %}:** Allows actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %} that you specify. You can specify individual actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %} or entire organizations and repositories.
 
 When specifying actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %}, use the following syntax:
 
-* To restrict access to specific tags or commit SHAs of an action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}, use the same syntax used in the workflow to select the action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}.
+* To manage access to specific tags or commit SHAs of an action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}, use the same syntax used in the workflow to select the action{% ifversion actions-workflow-policy %} or reusable workflow{% endif %}.
    * For an action, the syntax is `OWNER/REPOSITORY@TAG-OR-SHA`. For example, use `actions/javascript-action@v1.0.1` to select a tag or `actions/javascript-action@a824008085750b8e136effc585c3cd6082bd575f` to select a SHA.
    {%- ifversion actions-workflow-policy %}
-   * For a reusable workflow, the syntax is `OWNER/REPOSITORY/PATH/FILENAME@TAG-OR-SHA`. For example, `octo-org/another-repo/.github/workflows/workflow.yml@v1`.
+   * For a reusable workflow, the syntax is `OWNER/REPOSITORY/PATH/FILENAME@TAG-OR-SHA`. For example, `octo-org/another-owner/.github/workflows/workflow.yml@v1`.
     {%- endif %}
 * To specify a pattern, use the wildcard character, `*`.
    * To allow all actions{% ifversion actions-workflow-policy %} and reusable workflows{% endif %} in organizations that start with `space-org`, use `space-org*/*`.
@@ -79,7 +79,7 @@ When specifying actions{% ifversion actions-workflow-policy %} and reusable work
 
 ## Runners
 
-By default, anyone with admin access to a repository can add a self-hosted runner for the repository, and self-hosted runners come with risks:
+By default, anyone with owner access to a repository can add a self-hosted runner for the repository, and self-hosted runners come with risks:
 
 * There is no guarantee that self-hosted runners will be hosted on ephemeral, clean virtual machines. As a result, they may be compromised by untrusted code in a workflow.
 * Anyone who can fork the repository and open a pull request can compromise the self-hosted runner environment, potentially gaining access to secrets and the `GITHUB_TOKEN`, which may have write access to the repository.
@@ -87,11 +87,11 @@ By default, anyone with admin access to a repository can add a self-hosted runne
 In the "Runners" section, you can mediate these risks by disabling the use of repository-level self-hosted runners.
 
 {% ifversion ghec %}
-* **Disable for all organizations:** Prevents the creation of runners at the repository level.
-* **Disable in all Enterprise Managed User (EMU) repositories:** Prevents the creation of runners for repositories owned by {% data variables.enterprise.prodname_managed_users %}.
+* **Enable for all organizations:** Allows the creation of runners at the repository level.
+* **Enable in all Enterprise Managed User (EMU) repositories:** Allows the creation of runners for repositories owned by {% data variables.enterprise.prodname_managed_users %}.
 {% endif %}
 
-{% data reusables.actions.disable-selfhosted-runners-note %}
+{% data reusables.actions.enable-selfhosted-runners-note %}
 
 ## {% ifversion ghes %}Artifact, log, and cache settings{% else %}Artifact and log retention{% endif %}
 
@@ -155,11 +155,11 @@ You can control how users can run workflows on `pull_request` events in private 
 * **Send secrets to workflows from pull requests**. All secrets are available to the pull request.
 * **Require approval for fork pull request workflows**. Workflows on pull requests from collaborators without write permission will require approval from someone with write permission before they will run.
 
-If a policy is enabled for an enterprise, the policy can be selectively disabled in individual organizations or repositories. If a policy is disabled for an enterprise, individual organizations or repositories cannot enable it.
+If a policy is enabled for an enterprise, the policy can be selectively enabled in individual organizations or repositories. If a policy is enabled for an enterprise, individual organizations or repositories can disable it.
 
 ## Workflow permissions
 
-In the "Workflow permissions" section, you can set the **default** permissions granted to the `GITHUB_TOKEN`.
+In the "Workflow permissions" section, you can set the **administrative** permissions granted to the `GITHUB_TOKEN`.
 
 * **Read and write permissions:** By default, `GITHUB_TOKEN` has read and write access for all scopes.
 * **Read repository contents and packages permissions:** By default, `GITHUB_TOKEN` has only read access for the `contents` and `packages` scopes. The more permissive setting cannot be chosen as the default for individual organizations or repositories.
